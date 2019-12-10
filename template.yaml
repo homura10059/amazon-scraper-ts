@@ -1,0 +1,46 @@
+# https://github.com/awslabs/serverless-application-model/blob/develop/versions/2016-10-31.md
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Runtime: nodejs10.x
+    Timeout: 900
+    MemorySize: 512
+    Tracing: Active
+    DeadLetterQueue:
+      Type: SNS
+      TargetArn: arn:aws:sns:ap-northeast-1:267428311438:failed-lambda
+
+Resources:
+  Main:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: lambda_handler.default
+      Events:
+        ScheduledEventForMain:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 8 * * ? *)
+            Input: ''
+      Layers:
+        - !Ref CommonLayer
+  CommonLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      Description: puppeteer Layer
+      ContentUri: layer
+  LogGroupMain:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${Main}
+      RetentionInDays: 14
+
+Outputs:
+  AmazonScraper:
+    Description: 'Lambda Function ARN'
+    Value: !GetAtt Main.Arn
+  AmazonScraperIamRole:
+    Description: 'Implicit IAM Role created for lambda function'
+    Value: !GetAtt MainRole.Arn
