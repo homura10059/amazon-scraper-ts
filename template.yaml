@@ -4,9 +4,9 @@ Transform: AWS::Serverless-2016-10-31
 
 Globals:
   Function:
-    Runtime: nodejs10.x
-    Timeout: 900
-    MemorySize: 512
+    Runtime: nodejs12.x
+    Timeout: 600
+    MemorySize: 2048
     Tracing: Active
     DeadLetterQueue:
       Type: SNS
@@ -18,14 +18,53 @@ Resources:
     Properties:
       CodeUri: ./dist
       Handler: lambda_handler.default
+      Role: !GetAtt MainRole.Arn
+      Environment:
+        Variables:
+          TOPIC_ARN: dummy
       Events:
         ScheduledEventForMain:
           Type: Schedule
           Properties:
             Schedule: cron(0 8 * * ? *)
-            Input: ''
+            Input: '{"urls":["https://www.amazon.jp/hz/wishlist/ls/1KERB2C8N5NGY","https://www.amazon.jp/hz/wishlist/ls/1CU482XA9HO5F","https://www.amazon.jp/hz/wishlist/ls/3E1B11VRAD7UZ"]}'
       Layers:
         - !Ref CommonLayer
+  MainRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+      Policies:
+        -
+          PolicyName: "publish_sns"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: [
+                  "logs:CreateLogGroup",
+                  "logs:CreateLogStream",
+                  "logs:PutLogEvents"
+                ]
+                Resource: "*"
+              - Effect: "Allow"
+                Action: "sns:*"
+                Resource: "*"
+              - Effect: "Allow"
+                Action: [
+                  "xray:PutTraceSegments",
+                  "xray:PutTelemetryRecords",
+                  "xray:GetSamplingRules",
+                  "xray:GetSamplingTargets",
+                  "xray:GetSamplingStatisticSummaries"
+                ]
+                Resource: "*"
   CommonLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:

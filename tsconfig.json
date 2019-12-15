@@ -9,6 +9,6 @@
     "sourceMap": true,
     "outDir": "dist"
   },
-  "include": ["src/**/*", "jest.config.js", "jest.setup.js"],
+  "include": ["src/**/*", "jest.config.js", "jest.setup.js", "lambda_handler.test.ts"],
   "exclude": ["**/*.spec.*"]
 }
