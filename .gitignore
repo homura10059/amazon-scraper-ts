@@ -12,3 +12,5 @@ template.packaged.yaml
 
 # env
 env/
+
+.idea
