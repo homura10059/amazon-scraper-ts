@@ -1,4 +1,4 @@
-:art: コードのフォーマットや構造にテコ入れ
+:recycle: リファクタリング
 :rocket: パフォーマンスを改善
 :pencil2: ドキュメントを書いた時
 :construction: 作業中
@@ -11,3 +11,4 @@
 :lock: セキュリティ関係
 :heavy_exclamation_mark: 更新やTag付
 :wrench: config
+:tshirt: reformat
