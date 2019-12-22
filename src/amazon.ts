@@ -18,9 +18,7 @@ import {
 import { scrape } from './scraper'
 import { Page, Browser } from 'puppeteer-core'
 import { flatten } from 'fp-ts/lib/Array'
-import { randomSleep } from './util'
 import { PublishInput } from 'aws-sdk/clients/sns'
-import AWS from 'aws-sdk'
 
 export const getLinkListFromUrl = async (
   browser: Browser,

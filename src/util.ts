@@ -1,12 +1,3 @@
-export const randomSleep = () => {
-  const time = Math.floor(Math.random() * 1000)
-  return sleep(time)
-}
-
-const sleep = (msec: number) => {
-  return new Promise(resolve => setTimeout(resolve, msec))
-}
-
 export const peek = <A>(x: A) => {
   console.log(x)
   return x
