@@ -1,14 +1,20 @@
-:recycle: リファクタリング
-:rocket: パフォーマンスを改善
-:pencil2: ドキュメントを書いた時
-:construction: 作業中
-:sparkles: 機能を追加,完成
-:heavy_minus_sign: 機能を削除
-:speaker: ログを追加
-:mute: ログを削除
-:bug: バグ修正
-:white_check_mark: テスト関係
-:lock: セキュリティ関係
-:heavy_exclamation_mark: 更新やTag付
-:wrench: config
-:tshirt: reformat
+:tada: Initial Commit
+:bookmark: Version Tag
+:sparkles: New Feature
+:bug: Bugfix
+:recycle: Refactoring
+:shirt: Code Style
+:shower: Removal
+:pencil: Comments
+:rocket: Performance
+:wheelchair: Accessibility
+:art: Cosmetic
+:construction: Work In Progress (WIP)
+:shit: Deprecation
+:rotating_light: Tests
+:green_heart: CI and CD
+:up: Dependencies
+:card_index: Metadata
+:cop: Security Fix
+:books: Documentation
+:wrench: Tooling
