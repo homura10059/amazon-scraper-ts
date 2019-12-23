@@ -1,9 +1,6 @@
 export type wishListUrl = string
 export type goodsUrl = string
 
-export const CHROME_UA =
-  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
-
 export const TITLE = '#ebooksProductTitle'
 export const PRICE =
   '#buybox > div > table > tbody > tr.kindle-price > td.a-color-price.a-size-large.a-align-bottom.a-text-bold > span'
