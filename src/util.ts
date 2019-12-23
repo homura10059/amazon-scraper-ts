@@ -1,5 +1,12 @@
-export const peek = <A>(x: A) => {
-  console.log(x)
+import { fromNullable, fold } from 'fp-ts/lib/Option'
+import { log } from 'fp-ts/lib/Console'
+import { pipe } from 'fp-ts/lib/pipeable'
+
+export const peek = <A>(x: A): A => {
+  pipe(
+    fromNullable(x),
+    log
+  )()
   return x
 }
 
