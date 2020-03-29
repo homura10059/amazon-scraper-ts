@@ -18,6 +18,9 @@ export default async (event: Event): Promise<string> => {
 
   await getLinkListFromUrl(browser, wishListUrls) // wishListUrl[] -> goodsUrl[]
     .then(goodsUrls =>
+      goodsUrls.filter((elem, index, self) => self.indexOf(elem) === index)
+    )
+    .then(goodsUrls =>
       goodsUrls.map(url => getGoodsFromUrl.bind(null, browser, url))
     ) // goodsUrl[] -> Goods[]
     .then(goods => concurrentPromise<Goods>(goods, 3))

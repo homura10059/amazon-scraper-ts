@@ -8,7 +8,7 @@
     "test": "LOCAL=true jest",
     "build": "NODE_ENV=${NODE_ENV:-production} webpack",
     "package": "sam package --template-file template.yaml --s3-bucket lambda-function-deploy-packages --output-template-file template.packaged.yaml",
-    "deploy": "sam deploy --template-file template.packaged.yaml --stack-name ${npm_package_name} --capabilities CAPABILITY_IAM",
+    "deploy": "sam deploy --template-file template.packaged.yaml --stack-name ${npm_package_name}${STACK_ENV:-} --capabilities CAPABILITY_IAM",
     "clean": "rm -rf -v dist/* && rm -f template.packaged.yaml",
     "sam-deploy": "yarn clean && yarn build && yarn package && yarn deploy",
     "local-invoke": "sam local invoke --event ./events/events.json --env-vars env/env.json"
